@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Svatba Anička & Matěj</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Levý panel */
+    .side-nav {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(255,255,255,0.85);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-size: 14px;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+    }
+
+    .side-nav.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-nav a {
+      text-decoration: none;
+      color: #000;
+      transition: font-size 0.3s ease;
+    }
+
+    .side-nav a.active {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Top nav fix */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 0;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    /* Horní titulek */
+    .top-title {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(255,255,255,0.95);
+      padding: 10px 0;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .top-title.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    body {
+      scroll-behavior: smooth;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 60px 0;
+    }
+
+    @media (max-width: 768px) {
+      .side-nav {
+        display: none !important;
+      }
+    }
+
+  </style>
+
+  <script>
+    // Countdown
+    function updateCountdown() {
+      const weddingDate = new Date("2025-09-06T10:00:00");
+      const now = new Date();
+      const diff = weddingDate - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      document.getElementById("countdown").textContent =
+        `${days} dní ${hours} h ${minutes} min ${seconds} s`;
+    }
+    setInterval(updateCountdown, 1000);
+    window.onload = updateCountdown;
+
+    // Scroll behavior for top title
+    window.addEventListener('scroll', () => {
+      const topTitle = document.querySelector('.top-title');
+      const topNav = document.querySelector('.top-nav');
+
+      if (window.scrollY > 150) {
+        topTitle.classList.add('visible');
+        topNav.style.display = 'none';
+      } else {
+        topTitle.classList.remove('visible');
+        topNav.style.display = 'flex';
+      }
+    });
+
+    function scrollTopPage() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="top-nav">
+  <a href="#uvod">Úvod</a>
+  <a href="#program">Program dne</a>
+  <a href="#kde">Kde se potkáme</a>
+  <a href="#pruvod">Průvod</a>
+  <a href="#catering">Jídlo a Pití</a>
+  <a href="#galerie">Galerie</a>
+  <a href="#dary">Dary</a>
+  <a href="#kontakt">Kontakt</a>
+</nav>
+
+<!-- Horní titulek -->
+<div class="top-title" onclick="scrollTopPage()">
+  Svatba Anička & Matěj 6.9.2025
+</div>
+
+
+<!-- Levý panel -->
+<div class="side-nav" id="sideNav">
+  <a href="#uvod">Úvod</a>
+  <a href="#program">Program dne</a>
+  <a href="#kde">Kde se potkáme</a>
+  <a href="#pruvod">Průvod</a>
+  <a href="#catering">Jídlo a Pití</a>
+  <a href="#galerie">Galerie</a>
+  <a href="#dary">Dary</a>
+  <a href="#kontakt">Kontakt</a>
+</div>
+
+<section class="hero" id="uvod">
+  <img src="matej.jpg" alt="Úvodní fotografie">
+  <img src="zenich.svg" alt="Snoubenci">
+  <div class="countdown" id="countdown"></div>
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="program">
+  <img src="leva.jpg" class="side-image" alt="Levý obrázek">
+  <div class="content">
+    <h2>Program dne:</h2>
+    <div class="program">
+      10:00 – Sraz: Úhonice, Ke Hřišti 322 <br>
+      10:30 – Průvod k obřadnímu místu <br>
+      11:00 – Obřad a focení <br>
+      13:00 – Oběd na zahradě <br>
+      15:00 – Svatební veselice
+    </div>
+  </div>
+  <img src="prava.jpg" class="side-image" alt="Pravý obrázek">
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="kde">
+  <img src="leva.jpg" class="side-image" alt="Levý obrázek">
+  <div class="content">
+    <h2>Kde se potkáme</h2>
+    <p>Adresa: <a href="https://www.google.com/maps/place/Úhonice+Ke+Hřišti+322" target="_blank" class="link-black">Úhonice Ke Hřišti 322</a></p>
+    <p><strong>Doprava:</strong> Přímý autobus linky 307 ze Zličína:</p>
+    <p><em>10:05 – Zličín → 10:25 – Úhonice</em></p>
+    <p> Počet parkovacích míst bude omezen, prosíme využijte MHD, taxi nebo co nejmenší počet aut</p>
+  </div>
+  <img src="prava.jpg" class="side-image" alt="Pravý obrázek">
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="pruvod">
+  <div class="content" style="margin: auto;">
+    <h2>Průvod</h2>
+    <p>Zde je mapa, odkud půjdeme k obřadnímu místu:</p>
+    <img src="pruvod.jpg" alt="Mapa průvodu">
+    <p>Vzdálenost 2.7km, mírné stoupání po zpevněných cestách</p>
+  </div>
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="catering">
+  <img src="leva.jpg" class="side-image" alt="Levý obrázek">
+  <div class="content">
+    <h2>Jídlo a Pití</h2>
+    <h4>Jídlo</h4>
+    <p>Kuřecí maso, krkovice, opékané prase</p>
+    <p>další sladké a slané pokrmy</p>
+    <h4>Pití</h4>
+    <p>Na čepu: pivo, prosecco, kofola</p>
+    <p>další alko a nealko drinky</p>
+  </div>
+  <img src="prava.jpg" class="side-image" alt="Pravý obrázek">
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="galerie">
+  <img src="leva.jpg" class="side-image" alt="Levý obrázek">
+  <div class="content">
+    <h2>Galerie</h2>
+    <p>Budeme rádi, když s námi budete sdílet své zážitky z odpolední zábavy, u obřadu nechte telefony schované. 📸</p>
+    <p><a href="https://photos.app.goo.gl/NUYBVYpW8UorQoEg6" target="_blank" class="link-black">Otevřít Google Disk</a></p>
+    <p>Případně lze načíst i přes QR:</p>
+    <img src="qr_album_w.png" alt="QR alba">
+  </div>
+  <img src="prava.jpg" class="side-image" alt="Pravý obrázek">
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+
+<section id="info">
+  <img src="leva.jpg" class="side-image" alt="Levý obrázek">
+  <div class="content">
+    <h2>Další informace</h2>
+    <h4>Dary</h4>
+    <p>S dárečky si nelamte hlavu. To největší, co si přejeme, je, abyste přišli slavit s námi a užili si veselku. Pokud byste přesto na dárku trvali, budeme rádi za jakoukoliv drobnost nebo příspěvek.</p>
+    <h4>Dress Code</h4>
+    <p>Oblečte se, v čem se cítíte pohodlně. Spíše tedy smart casual, obleky nejsou povinné.</p>
+  </div>
+  <img src="prava.jpg" class="side-image" alt="Pravý obrázek">
+</section>
+
+<div class="divider"><img src="flowers.svg" alt="Oddělovač květin"></div>
+
+<section id="kontakt">
+  <div class="content" style="margin: auto;">
+    <h2>Děkujeme!</h2>
+    <p>Těšíme se na vás!<br>Anička a Matěj</p>
+    <p>Kontakt: nevesta@example.com | zenich@example.com</p>
+    <img src="prsteny.jpg" alt="Prsteny" style="max-width: 320px;">
+  </div>
+</section>
+
+<script>
+  // Zobrazení levého panelu po scrollu
+  const sideNav = document.getElementById("sideNav");
+  window.addEventListener("scroll", () => {
+    if(window.scrollY > 100){
+      sideNav.classList.add("visible");
+    } else {
+      sideNav.classList.remove("visible");
+    }
+  });
+
+  // Zvýraznění aktuální sekce
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".side-nav a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 150;
+      if (scrollY >= sectionTop) current = section.getAttribute("id");
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
