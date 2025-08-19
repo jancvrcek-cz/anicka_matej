@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@300;500&display=swap');
 
-html {
-  scroll-behavior: smooth; /* fallback smooth scroll */
+:root{
+  --maxw: 900px;
+  --gap: 40px;
 }
 
-@media (max-width: 768px) {
-  .side-nav {
-    display: none !important;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -16,10 +13,11 @@ body {
   color: #2e2e2e;
 }
 
+/* Nadpisy škálují podle šířky */
 h1, h2, h3 {
   font-family: 'Great Vibes', cursive;
   color: #3f3f3f;
-  font-size: 3em;
+  font-size: clamp(28px, 6vw, 48px);
 }
 
 /* --- TOP NAVIGATION --- */
@@ -30,7 +28,7 @@ h1, h2, h3 {
   display: flex;
   justify-content: center;
   gap: 30px;
-  padding: 15px 0;
+  padding: 12px 8px;
   font-family: 'Raleway', sans-serif;
   border-bottom: 1px solid #eee;
   z-index: 1000;
@@ -40,62 +38,59 @@ h1, h2, h3 {
   color: #333;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.1em;
+  font-size: clamp(14px, 2.8vw, 18px);
   transition: color 0.3s;
+  white-space: nowrap;        /* důležité pro posuv na mobilu */
+  padding: 6px 4px;
 }
 
-.top-nav a:hover {
-  color: #a05c5c;
-}
+.top-nav a:hover { color: #a05c5c; }
 
+/* --- SECTIONS --- */
 section {
   padding: 60px 20px;
-  max-width: 900px;
+  max-width: var(--maxw);
   margin: auto;
-  font-size: 1.3em;
+  font-size: clamp(15px, 2.4vw, 21px);
   line-height: 1.8em;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 40px;
+  gap: var(--gap);
 }
 
-.content {
-  flex: 1 1 500px;
-  text-align: center;
-}
+.content { flex: 1 1 500px; text-align: center; }
 
+/* --- HERO --- */
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 20px;
+  padding: 100px 20px 60px;
   gap: 40px;
 }
 
 .countdown {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.4em;
-  margin-top: 60px;
+  font-size: clamp(24px, 6vw, 40px);
+  margin-top: 20px;
   color: #222;
   text-align: center;
-  margin: 60px auto 0 auto;
 }
 
+/* Program – lepší zalamování */
 .program {
   white-space: pre-wrap;
-  word-break: keep-all;
+  word-break: break-word;
   font-size: 1.2em;
-  line-height: 2;
+  line-height: 1.4;
 }
 
-iframe {
-  margin-top: 20px;
-  border-radius: 12px;
-}
+iframe { margin-top: 20px; border-radius: 12px; }
 
 img {
   max-width: 100%;
+  height: auto;              /* žádné natahování */
   border-radius: 10px;
   margin-top: 20px;
 }
@@ -105,23 +100,81 @@ img {
   flex-shrink: 0;
 }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.6em;
+p { font-size: 1.05em; line-height: 1.6em; }
+
+.divider { margin: 40px auto; max-width: 700px; }
+.divider img { width: 100%; opacity: 0.9; }
+
+.link-black { color: #000; text-decoration: underline; font-weight: bold; }
+
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 900px) {
+  :root{ --gap: 24px; }
+  section { padding: 44px 16px; }
 }
 
-.divider {
-  margin: 40px auto;
-  max-width: 700px;
+/* Telefony */
+@media (max-width: 768px) {
+  /* levé menu se skrývá – už řešeno i v HTML inline, necháváme zde pro jistotu */
+  .side-nav { display: none !important; }
+
+  /* top-nav je posuvná lišta */
+  .top-nav {
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  /* sekce do sloupce */
+  section {
+    flex-direction: column;
+    align-items: center;
+    max-width: 680px;
+    gap: 16px;
+  }
+
+  /* boční obrázky na mobilu skryjeme, aby nic nepřetékalo */
+  .side-image { display: none; }
+
+  /* menší mezery v hero */
+  .hero { padding-top: 80px; gap: 24px; }
+
+  /* zkrácená výška oddělovače */
+  .divider { margin: 24px auto; }
+
+  /* obrázky bez horního marginu v některých blocích */
+  img { margin-top: 12px; }
 }
 
-.divider img {
-  width: 100%;
-  opacity: 0.9;
+/* Velmi malé telefony */
+@media (max-width: 360px) {
+  .top-nav a { font-size: 14px; }
 }
 
-.link-black {
-  color: #000;
-  text-decoration: underline;
-  font-weight: bold;
+/* --- Vylepšení pro PC verzi --- */
+@media (min-width: 1024px) {
+  /* Nadpisy větší */
+  h1, h2, h3 {
+    font-size: clamp(36px, 4vw, 56px);
+  }
+
+  /* Obsah sekcí víc „dýchá“ */
+  section {
+    padding: 80px 40px;
+    gap: 40px;
+  }
+
+  /* Specificky sekce s adresou */
+  #kde .content {
+    font-size: 1.1em;       /* větší písmo */
+    line-height: 1.6;       /* vyšší řádkování */
+    padding: 0 10px;        /* trochu odsazení od obrázků */
+  }
+
+  #kde p {
+    margin-bottom: 10px;    /* větší mezery mezi odstavci */
+  }
 }
+
