@@ -115,7 +115,6 @@ p { font-size: 1.05em; line-height: 1.6em; }
 
 /* Telefony */
 @media (max-width: 768px) {
-  /* levé menu se skrývá – už řešeno i v HTML inline, necháváme zde pro jistotu */
   .side-nav { display: none !important; }
 
   /* top-nav je posuvná lišta */
@@ -127,30 +126,29 @@ p { font-size: 1.05em; line-height: 1.6em; }
     scrollbar-width: thin;
   }
 
-  /* sekce do sloupce */
+  /* sekce do sloupce, vše centrované */
   section {
     flex-direction: column;
-    align-items: center;
+    align-items: center;   /* centrování obsahu */
+    text-align: center;    /* text na střed */
     max-width: 680px;
-    gap: 16px;
+    gap: 24px;
   }
 
-  /* boční obrázky na mobilu skryjeme, aby nic nepřetékalo */
-  .side-image { display: none; }
+  /* boční obrázky – menší a s větší mezerou od textu */
+  .side-image {
+    display: block;
+    width: 140px;          /* menší šířka květin */
+    margin: 10px auto;     /* centrovat */
+  }
 
-  /* menší mezery v hero */
+  /* hero menší mezery */
   .hero { padding-top: 80px; gap: 24px; }
 
-  /* zkrácená výška oddělovače */
+  /* kratší výška oddělovače */
   .divider { margin: 24px auto; }
 
-  /* obrázky bez horního marginu v některých blocích */
   img { margin-top: 12px; }
-}
-
-/* Velmi malé telefony */
-@media (max-width: 360px) {
-  .top-nav a { font-size: 14px; }
 }
 
 /* --- Vylepšení pro PC verzi --- */
